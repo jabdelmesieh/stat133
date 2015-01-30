@@ -1,0 +1,5 @@
+name = "Jason Abdelmesieh"
+SID = "24468462"
+email = "jabdelmesieh@berkeley.edu"
+github_name = "jabdelmesieh"
+status = "enrolled"
