@@ -60,17 +60,19 @@
 # Q1a. How many world records does this data frame contain?
 
 # n.wr <- your code here
+n.wr <- nrow(wr1500m)
+n.wr
 
 # Q1b. Use R commands to find out who currently holds the world
 # record in the men's 1500 meter.
- 
+
 # wr.name <- your code here
-
-
+wr.name<-wr1500m$athlete[wr1500m$times==min(wr1500m$times)]
+wr.name
 # Let's look at the relationship between date and time.
 # Q1c. What type of variable (numeric (continuous or discrete), nominal ordinal)
 # are year and times? (no need to save the output, just look at it)
-
+#Year is a discrete ordinal variable and times is a continuous numeric variable.
 
 # When we are examining a variable to see how it changes in time,
 # we typically make a line plot, with time on the x-axes and 
@@ -82,11 +84,10 @@
 # But do add 180 to the times so that they are accurate measurements in seconds,
 # store that in a new variable and add to the data frame.
 
-# times_sec <- your code here
-# wr1500m <- your code here
-# plot( your code here )
-
-
+times_sec <- c(wr1500m$times)+180
+times_sec
+cbind(wr1500m, times_sec)
+plot(c(wr1500m$year),times_sec) 
 
 # Q2b. Redo the plot using a date that incorporates the month as 
 # well as the year. For example, in Sep 1904 the world record 
@@ -97,9 +98,13 @@
 # Add new_year to the dataframe.
 
 # your code here
-# new_year <- your code here
-# wr1500m <- your code here
-# plot( your code here )
+month<-c(wr1500m$month)
+month[is.na(month)]<-6
+new_year <- c(wr1500m$year)+month/12
+new_year
+wr1500m <- cbind(wr1500m, new_year)
+wr1500m
+plot(wr1500m$new_year, times_sec)
 
 
 # Q3. The current world record was set in 1998. If we want to
@@ -109,11 +114,9 @@
 # To do this: remake the plot and set the xlim parameter 
 # so that 2014 is included in the x-axis scale;
 # then use the lines() function to add the additional segment.
-
-# wr_1998 <- your code here
-# plot( your code here )
-# lines( your code here )
-
+wr_1998=206
+plot(wr1500m$new_year, times_sec, xlim=c(1892,2014),type="s")
+lines(c(max(wr1500m$new_year), 2014), c(206,206))
 
 # Q4. There are two times where the record stood for several
 # years - in 1944 and 1998. Let's make it easier to see these
@@ -127,16 +130,16 @@
 # Also, do not type in the athlete's name. Instead, use subsetting
 # of wr1500m$athlete to access it.
 
-# wr_1944 <- your code here
-# abline( your code here )
-# abline( your code here )
-# text( your code here )
-# text( your code here )
-
+abline(v=1944,col="grey")
+abline(v=1998, col="grey")
+text(1944, 210, labels=wr1500m$athlete[wr1500m$year==1944])
+text(1998, 220, labels=wr1500m$athlete[wr1500m$year==1998])
+wr_1944 <- 223
 
 # Q5. Now we are ready to add other contextual information.
 # Remake the plot as before but now adding axis labels and a title.
 # This is the FINAL version of the plot of world record times.
+plot(wr1500m$new_year, times_sec, xlim=c(1892,2014),type="s", xlab="Year", ylab="Time (seconds)",main="World Record 1500m Runs")
 
 # put your final version of the plotting commands below.
 
@@ -154,7 +157,7 @@
 # The data frame SO2012Ctry contains this information.
 # It can be loaded into R with
 
-# load( your code here )
+load("C:/Users/JisinAbdelmesieh/assignments/hw2/SummerOlympics2012Ctry.rda")
 
 
 #Q6 Take a look at the variables in this data frame.
@@ -176,7 +179,7 @@
 # Consider which of the three principles of good graphics this
 # plot violates and why.
 
-# plot( your code here )
+plot(SO2012Ctry$GDP,SO2012Ctry$pop)
 
 
 ### Data stand out, Values are plotted on the top of each other  
@@ -190,16 +193,19 @@
 # symbols() where the area of the circle is proportional to the 
 # total number of medals.
 
-# GDP_per_person <- your code here
+GDP_per_person<-c(SO2012Ctry$GDP)/c(SO2012Ctry$pop)
 # SO2012Ctry <- your code here
-# symbols( your code here )
-
+symbols(log(GDP_per_person),log(SO2012Ctry$pop), circles = (SO2012Ctry$Total), inches=TRUE,xlab="GDP/Person", ylab="Population",main = "GDPPP")
 
 # Q8. It appears that the countries with no medals are circles too.
 # Remake the plot, this time using *only the countries that won medals*. 
 # If necessary adjust the size of the circles.
 # Then add the non-medal countries to the plot using the "." 
 # plotting character.
+x<-subset(SO2012Ctry, Total!=0)
+y<-subset(SO2012Ctry, Total<1)
+symbols(log(x$GDPPP),log(x$pop), circles=x$Total,inches=TRUE,xlab="GDPPP",ylab="Population", main="GDPPP")
+symbols(log(y$GDPPP),log(y$pop), circles=y$Total,inches=TRUE,xlab="",ylab="", main="GDPPP",xaxt="n",yaxt="n",add=TRUE)
 
 # your plotting code here
 
@@ -207,6 +213,15 @@
 # title, and label 5 of the more interesting points
 # with the country name. Use text() to do this.
 
+symbols(x$GDPPP,x$pop, circles=x$Total,inches=TRUE,xlab="GDPPP",ylab="Population", main="GDPPP")
+text(5453.26,1338300000, labels="China")
+text(81222.85,7826000, labels="Switzerland")
+text(-1000,221121000, labels="Egypt")
+text(48792.79,309349000,labels="United States")
+symbols(y$GDPPP,y$pop,add=TRUE, circles=y$Total,inches=TRUE,xlab="",ylab="", main="GDPPP",xaxt="n",yaxt="n")
+text(153190.05,35407, label="Monaco")
+top5<-c("China","Switzerland","United States","Egypt","Monaco")
+top5
 # top5 <- order( your code here )
 # your plotting code here, including a new call to text() 
 
@@ -220,8 +235,10 @@
 # where the countries are filled with a light grey color.
 
 ## you only need to run these two lines once:
-install.packages("maps")
-library("maps")
+#install.packages("maps")
+#library("maps")
+
+world<-map(database = "world", regions = ".", exact = FALSE, boundary = TRUE, fill=TRUE, col="gray70")
 
 # world <- map( your code here )
 
@@ -230,12 +247,16 @@ library("maps")
 # won by the country. You may find the add parameter useful.
 # (Be sure to NOT plot circles for countries with 0 medals).
 # adjust the size of the circles if necessary
-
+world<-map(database = "world", regions = ".", exact = FALSE, boundary = TRUE, fill=TRUE, col="gray70")
+symbols(x$longitude, x$latitude,circles=x$Total, inches=TRUE,add=TRUE)
 # Check what variables you have in the dataframe using names().
-
+names(SO2012Ctry)
 # pull out the contries that won at least one medal (you will need at least
 # the contries longitude, latitude and Total.)
-
+wonmedal<-subset(SO2012Ctry,Total!=0)
+wonmedal
+world<-map(database = "world", regions = ".", exact = FALSE, boundary = TRUE, fill=TRUE, col="gray70")
+symbols(x$longitude, x$latitude,circles=(x$Total)/50, inches=TRUE,add=TRUE)
 # wonMedal <- your code here
 # world <- your code here
 # symbols( your code here )
@@ -253,16 +274,20 @@ library("maps")
 # e.g. myColor = "#FEB24CAA" or   "#FEB24C88"
 
 # You only need to call these two lines once:
-install.packages("RColorBrewer")
-library("RColorBrewer")
+#install.packages("RColorBrewer")
+#library("RColorBrewer")
 
 # display.brewer.all( your code here )
+display.brewer.all(type="qual")
 # brewer.pal( your code here )
-
+brewer.pal(8,"Set2")
 # myGold <- your selected color
-
+myGold<-"#FFD92FAA"
 #world <- your code here
 #symbols( your code here )
+world<-map(database = "world", regions = ".", exact = FALSE, boundary = TRUE, fill=TRUE, col="gray70")
+
+symbols(x$longitude, x$latitude,circles=(x$Total)/50, inches=TRUE,bg=myGold,add=TRUE)
 
 
 ## That was the FINAL version of this plot
@@ -276,6 +301,7 @@ library("RColorBrewer")
 # The data file is called London2012ALL_ATHLETES.rda
 # and contains information about every athlete who competed 
 # in the Olympics.
+load("C:/Users/JisinAbdelmesieh/assignments/hw2/London2012ALL_ATHLETES.rda")
 
 # load( )
 
@@ -297,13 +323,18 @@ names(athletes)
 
 # How many athletes competed in the 2012 Olympics?
 # n.athletes <- your code here
-
+n.athletes<-nrow(athletes)
+n.athletes
 # How many women competed?
-
+women<-nrow(subset(athletes,Sex=="F"))
+women
 # What proportion of the participants were women?
 # frac.women <- your code here
-
+frac.women<- women/n.athletes
+frac.women
 # How many sports were there?
+n.sports<-athletes$Sport[which(!duplicated(athletes$Sport))]
+n.sports
 # n.sports <- your code here
 
 
@@ -313,13 +344,18 @@ names(athletes)
 # Make the barplot with the parameter beside = TRUE and 
 # and again with beside = FALSE. Determine which of these 
 # barplots provides the easiest comparison. 
+athTab<-table( athletes$Sex,athletes$Sport)
+athTab
 
 # athTab <- your code here
-# make two barplots
 
+# make two barplots
+besideFalse<-barplot(athTab, width = 1, space = NULL, names.arg = NULL, legend.text = NULL, beside = FALSE)
+besideTrue<-barplot(athTab, width = 1, space = NULL,names.arg = NULL, legend.text = NULL, beside = TRUE)
 
 # what should beside be set to, T/F?
 # set.beside <- your answer
+set.beside<-barplot(athTab, width = 1, space = NULL,names.arg = NULL, legend.text = NULL, beside = TRUE)
 
 ### Barplot with beside = TRUE provides the easiest comparison. 
 
@@ -329,7 +365,11 @@ names(athletes)
 # plot in Q 14. 
 
 # athTab2 <- table()
+athTab2<-table(athletes$Sport,athletes$Sex)
+athTab2
+
 # make barplot
+besideTrue2<-barplot(athTab2, width = 1, space = NULL,names.arg = NULL, legend.text = NULL, beside = TRUE)
 
 
 # Compare the barplot with (Sex, Sport) vs (Sport, Sex). 
@@ -337,6 +377,7 @@ names(athletes)
 # store your answer (1 or 2) in best.plot.
 
 # best.plot <- your answer
+best.plot<-set.beside<-barplot(athTab, width = 1, space = NULL,names.arg = NULL, legend.text = NULL, beside = TRUE)
 
 
 # Q16. Notice that the bars are in alphabetical order by sport.
@@ -350,8 +391,10 @@ names(athletes)
 # increasing height.
 
 # orderSport <- your code here
+orderSport<-order(table(athletes$Sport),decreasing=TRUE)
+orderSport
 # barplot( your code here )
-
+barplot(athTab[, orderSport], beside=TRUE)
 
 # Q17. Finally to make the plot more informaation rich, try turning
 # the x-axis labels on their side. To do this, find a parameter
@@ -360,6 +403,7 @@ names(athletes)
 # parameter can be added in the call to barplot().
 # Also find and use a parameter to shrink the text for these labels. 
 # Lastly, add a title to the plot.
+barplot(athTab[, orderSport], beside=TRUE, main="Sports by Sex", xlab="Sport", ylab="Number of Participants", legend.text=TRUE,las=2,cex.names=0.5,col=cols)
 
 
 # This was the final version of the 4th plot.
