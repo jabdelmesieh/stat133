@@ -157,7 +157,7 @@ plot(wr1500m$new_year, times_sec, xlim=c(1892,2014),type="s", xlab="Year", ylab=
 # The data frame SO2012Ctry contains this information.
 # It can be loaded into R with
 
-load("C:/Users/JisinAbdelmesieh/assignments/hw2/SummerOlympics2012Ctry.rda")
+load("SummerOlympics2012Ctry.rda")
 
 
 #Q6 Take a look at the variables in this data frame.
@@ -301,7 +301,7 @@ symbols(x$longitude, x$latitude,circles=(x$Total)/50, inches=TRUE,bg=myGold,add=
 # The data file is called London2012ALL_ATHLETES.rda
 # and contains information about every athlete who competed 
 # in the Olympics.
-load("C:/Users/JisinAbdelmesieh/assignments/hw2/London2012ALL_ATHLETES.rda")
+load("London2012ALL_ATHLETES.rda")
 
 # load( )
 
