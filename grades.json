@@ -1,0 +1,23 @@
+{
+    "login": "jabdelmesieh", 
+    "url": "git@github.com:jabdelmesieh/stat133.git", 
+    "name": "Jason Abdelmesieh", 
+    "email": "jabdelmesieh@berkeley.edu", 
+    "github_name": "jabdelmesieh", 
+    "status": "enrolled", 
+    "grades": {
+        "hw1": {
+            "note": "", 
+            "hash": "255bee483ca956b301a95dd5f33cc0cdde791ef4", 
+            "earned": 0, 
+            "possible": 20, 
+            "penalty": 0, 
+            "parts": {
+                "hw1": {
+                    "possible": 20, 
+                    "earned": 0
+                }
+            }
+        }
+    }
+}
