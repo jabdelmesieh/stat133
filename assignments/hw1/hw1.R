@@ -42,23 +42,27 @@
 # Create the variable
 # << y >> : a vector of length 100 which has the even numbers from 2 to 200.
 # For clarity put your code here, directly below the 
+y<-c(seq(2,200,by=2))
 y
-
 # Create the variable
 # << z >> : a vector of length 20 with character entries, "hw1", "hw2", ..., "hw20"
-z
+z<-c(seq("hw1","hw20",by=1))
 # Create the variable
 # << m >> : a vector of length 100 with entries from a standard normal distribution
 set.seed(42)
+m<-c(rnorm(100))
 m
 # Create the variable
 # << mean.m >> : a scalar, the mean of the numbers in << m >>
+mean.m<-mean(m)
 mean.m
 # Creat the variable
 # << sd.m >> : a scalar, the standard deviation of the numbers in << m >>
+sd.m<-sd(m)
 sd.m
 # Create the variable
 # << max.m >> : a scalar, the maximum of the numbers in << m >>
+max.m<-max(m)
 max.m
 
 ##################################################################################
@@ -80,14 +84,16 @@ load("family.rda")
 
 # Create a new data frame 
 # << family.men >> : a data frame that is a subset of family, with only the men
-family.men
+family.men<-subset(family,family$gender=="m")
 
+family.men
 # Create a new data frame 
 # << family.young >> : a data frame, subset of family, with only people *under* 40
+family.young<-subset(family,family$age<40)
 family.young
-
 # Create a new data frame 
 # << family.30y68i >> : a data frame, subset of family, with only people *over* 30, *shorter* than 68 in
+family.30y68i<-subset(family,family$age>30 & family$height<68)
 family.30y68i
 
 # Formula for BMI : BMI = (weight in lbs) / (height in in)^2 * 703

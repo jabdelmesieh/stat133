@@ -8,15 +8,18 @@
 
 # Input variable:
 # <data.list>: a list whose elements are vectors of varying length
-
+test.lengths<-list(a=c(1:10),b=c(1:4),c=c(1:7))
+list.lengths.test<-function(list){
+  lengths<-sapply(list,length)
+  return(lengths)
+}
 # Output variable:
 # <element.lengths>: a numeric vector whose entries are the lengths of each
 #   element of <data.list>
 
-listLengths <- function(data.list) {
-
-    # your code here
-
+element.lengths <- function(data.list) {
+  list.lengths<-sapply(data.list,length)
+  return(list.lengths)
 }
 
 #### Function 2
@@ -25,18 +28,32 @@ listLengths <- function(data.list) {
 # Input variable :
 # <x> : a numeric vector of length n
 # <k> : an integer
+testx<-c(1:10)
+testk<-5
+testx.powers<-function(testx,testk) {
+  outer(testx,seq(from=1, to=testk), "^")
+  
+}
+
+
+  
+
 
 # Output variable
 # <x.powers> : A matrix of size [n x k] where the first column is x, the second column x^2, the third column x^4, etc.
 #              the column names should be : "x", "x^2", "x^3" etc.
+x<-vector()
+k<-integer
 
-powers <- function(x, k){
-
+x.powers <- function(x, k){
+  outer
 }
 
  
 #### Function #3
 #### Implement the function "recipeConversion"
+
+test.recipe<-matrix(c(1:10),c(10:20),c(20:30))
 
 # Input variable:
 # <recipe> : A data frame with three columns named "amount", "unit" and "ingredient"
@@ -63,8 +80,15 @@ powers <- function(x, k){
 # function should stop and print out an error message
 
 # Put your code here
-recipeConversion <- function(recipe){
 
+test.recipe<-data.frame(amount=1:3,unit=c("cup","cups","oz"),ingredient=1:3)
+test.recipeconversion<-function(test.recipe){
+  test.recipe$unit[test.recipe$unit=="cup"] <-"ml"
+  
+}  
+
+recipeConversion <- function(recipe){
+  
 }
 
 

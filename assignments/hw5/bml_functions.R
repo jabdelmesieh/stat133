@@ -31,7 +31,7 @@ bml.step.red<-function(m){
   red.blocked<-(blocked)*(m==1)
   red.unblocked<-(m==1)*(!blocked)
   final.red<-(m!=1)*m+(red.blocked)+(re
-d.unblocked[,c(ncol(m),2:ncol(m)-1)])
+  red.unblocked[,c(ncol(m),2:ncol(m)-1)])
   return(final.red)
 }
 bml.step.blue<-function(m){

@@ -100,13 +100,14 @@ hist(infants$dht)
 ## against the education level of the fathers (variable ded in the data frame).
 ## Store the table in the variable [[ ed.table ]]
 ed.table <- table(infants$ed, infants$ded)
-
+ed.table
 
 ########################################### FOURTH PART
 ## Write a function that takes as input a vector x and returns a standardized vector
 ## (i.e. x after subtracting the mean and dividing with the sd)
 
-standardize <- function(x){
+standardize1 <- function(x){
 
     return((x-mean(x, na.rm=T))/sd(x, na.rm=T))
 }
+fg<-c(1,2,3,4,5,6,7,8,9,10)
