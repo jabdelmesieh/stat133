@@ -9,7 +9,13 @@
 #   <num.dollar>: an integer indicating how many elements of <chvec> contain the "$"
 #     symbol. For example: numDollarElements(c('dollar', 'd$llar', '$$$')) should return 2
 
-
+num.dollar<-function(chvec){
+  chvec<- gsub("[[:alpha:]]", "", chvec)
+  chvec<- chvec[chvec!=""]
+  num.dollar<-length(chvec)
+  return(num.dollar)
+}
+test1<-c("dollar", "$$","dollar$", "23$5","fija$","%","3")
 
 # Write a function called prodDigits that compute the product of all (single) digits in
 # a string.  The function should return 0 if there is no digit in the
@@ -18,6 +24,17 @@
 #
 # and return the following
 #   <total>: A single number (the product of all digits in chvec)
+
+prodDigits<-function(chvec){
+  chvec<-gsub("[[:alpha:]]","",chvec)
+  chvec<-gsub("[[:punct:]]","",chvec)
+  chvec<-gsub(" ", "",chvec)
+  chvec<-unlist(strsplit(chvec,"",fixed=TRUE))
+  total<-prod(as.numeric(chvec))
+  return(total)
+}
+test2<-("1hou3*7 2")
+
 
 
 
@@ -35,7 +52,25 @@
 # and return
 #   <herchvec>: The same character vector with the required substitutions.
 
+hisToHer<-function(chvec){
+  for(i in 1:length(chvec)){
+    if(chvec[i]=="him"){
+      chvec[i]<-"her"
+    }
+    if(chvec[i]=="he"){
+      chvec[i]<-"she"
+    }
+    if(chvec[i]=="his"){
+      chvec[i]<-"her"}
+  if(chvec[i]!="his|he|him"){
+    chvec[i]<-chvec[i]
+  }  
+  
+  }
+  return(chvec)
+}
 
+test3<-c("his","her","he", "him")
 # A test case
 all.equal(
   hisToHer("he went to the store his mother gave him"), 
