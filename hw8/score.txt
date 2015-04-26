@@ -1,0 +1,4 @@
+oneBoot: wrong understanding of 'fit'  -2
+did not simulate or plot the genBootR case -4
+
+Score: 14/20
