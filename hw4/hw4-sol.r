@@ -37,7 +37,7 @@ listLengths <- function(data.list) {
 # <x.powers> : A matrix of size [n x k] where the first column is x, the second column x^2, the third column x^4, etc.
 #              the column names should be : "x", "x^2", "x^3" etc.
 
-powers <- function(x, k){
+powers1 <- function(x, k){
     if(!is.numeric(x)) warning("x should be a numeric vector")
     x.powers <- x
     for(i in 2:k){
