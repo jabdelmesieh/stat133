@@ -12,13 +12,14 @@
 # Output variable:
 # <element.lengths>: a numeric vector whose entries are the lengths of each
 #   element of <data.list>
-
+element.lengths<-c()
 listLengths <- function(data.list) {
-
-    # your code here
-
+  for(i in 1:length(data.list)){
+  element.lengths[i]<-length(data.list[[i]])
 }
-
+  return(element.lengths)
+}
+test1<-list(1:3,1:4,4:9)
 #### Function 2
 #### Implement the function "powers"
 
@@ -31,9 +32,16 @@ listLengths <- function(data.list) {
 #              the column names should be : "x", "x^2", "x^3" etc.
 
 powers <- function(x, k){
+  x.powers<-matrix(,k,length(x))
+  for(i in 1:k){  
+  x.powers[i,]<-x^i
+  }
+  rownames(x.powers)<-paste0("x^",1:k)
+  return(t(x.powers))
+}  
 
-}
-
+test2<-c(1,2,3,4,5,6)
+test3<-5
  
 #### Function #3
 #### Implement the function "recipeConversion"
@@ -64,10 +72,10 @@ powers <- function(x, k){
 
 # Put your code here
 recipeConversion <- function(recipe){
-
+  
 }
 
-
+test4<-data.frame()
 #### Function #4a
 # Implement the function "bootstrapVarEst"
 
