@@ -50,8 +50,8 @@ title="Car Models",
 hAxes="[{title: 'Displacement'}]",
 vAxes= "[{title: 'Miles per Gallon'}]"
 )
-bub <- gvisBubbleChart(cars, idvar="models",xvar="disp",yvar="mpg",
-                       sizevar="hp",colorvar="gear",options=optionlist)
+bub <- gvisBubbleChart(mtcars, idvar="models",xvar="disp",yvar="mpg",
+                       sizevar="hp",colorvar="gear",options=optionlist) # Is mtcars rather than cars here -- Andy
 
 # Now plot your bubble chart output, 'bub', 
 # the chart will show up in a new tab in your web browser.
