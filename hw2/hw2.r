@@ -50,7 +50,8 @@
 # for analysis.).  Right now, the data are available to you in
 # the hw3 directory in the file WR1500MeterMen.rda.
 
-# load the data
+                                        # load the data
+load("WR1500MeterMen.rda")
 
 # The name of the object loaded is wr1500m
 # The time (in the column "times") in these data are recorded in seconds, 
@@ -236,7 +237,7 @@ top5
 
 ## you only need to run these two lines once:
 ##install.packages("maps")
-#library("maps")
+library("maps")
 
 world<-map(database = "world", regions = ".", exact = FALSE, boundary = TRUE, fill=TRUE, col="gray70")
 
@@ -275,7 +276,7 @@ symbols(x$longitude, x$latitude,circles=(x$Total)/50, inches=TRUE,add=TRUE)
 
 # You only need to call these two lines once:
 ##install.packages("RColorBrewer")
-#library("RColorBrewer")
+library("RColorBrewer")
 
 # display.brewer.all( your code here )
 display.brewer.all(type="qual")
@@ -403,7 +404,7 @@ barplot(athTab[, orderSport], beside=TRUE)
 # parameter can be added in the call to barplot().
 # Also find and use a parameter to shrink the text for these labels. 
 # Lastly, add a title to the plot.
-barplot(athTab[, orderSport], beside=TRUE, main="Sports by Sex", xlab="Sport", ylab="Number of Participants", legend.text=TRUE,las=2,cex.names=0.5,col=cols)
+barplot(athTab[, orderSport], beside=TRUE, main="Sports by Sex", xlab="Sport", ylab="Number of Participants", legend.text=TRUE,las=2,cex.names=0.5) #,col=cols)
 
 
 # This was the final version of the 4th plot.
